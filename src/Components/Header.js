@@ -10,11 +10,19 @@ import {
 import NotificationsNoneIcon from "@material-ui/icons/NotificationsNone";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
+import { makeStyles } from "@material-ui/styles";
 
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: "#fff",
+  },
+});
 export default function Header() {
+  const classes = useStyles();
+
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Grid container>
             <Grid item>
