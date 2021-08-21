@@ -1,11 +1,12 @@
 
+import SideMenu from '../Components/SideMenu';
 import './App.css';
 
 function App() {
   return (
-    <div>
-      here we go
-    </div>
+    <>
+      <SideMenu />
+    </>
   );
 }
 
