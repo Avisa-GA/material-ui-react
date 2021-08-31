@@ -13,6 +13,7 @@ const initialsFValues = {
   id: 0,
   fullName: "",
   email: "",
+  mobile: "",
   city: "",
   gender: "male",
   departmentId: "",
@@ -41,6 +42,14 @@ export default function EmployeeForm() {
             value={values.email}
             onChange={handleInputChange}
           />
+
+          <Controls.Input
+            variant="outlined"
+            name="mobile"
+            label="Mobile"
+            value={values.mobile}
+            onChange={handleInputChange}
+          />
           <Controls.Input
             variant="outlined"
             name="city"
@@ -64,12 +73,26 @@ export default function EmployeeForm() {
             onChange={handleInputChange}
             options={employeeService.getDepartmentCollection()}
           />
+          <Controls.DatePicker
+            name="hireDate"
+            label="Hire Date"
+            value={values.hireDate}
+            onChange={handleInputChange}
+          />
           <Controls.CheckBox
             name="isPermanent"
             label="Permanent Employee"
             value={values.isPermanent}
             onChange={handleInputChange}
           />
+          <div>
+            <Controls.Button
+              variant="contained"
+              color="primary"
+              size="large"
+              text="Submit"
+            />
+          </div>
         </Grid>
       </Grid>
     </Form>
