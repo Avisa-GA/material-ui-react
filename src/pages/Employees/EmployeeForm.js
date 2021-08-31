@@ -22,10 +22,29 @@ const initialsFValues = {
 };
 
 export default function EmployeeForm() {
-  const { values, setValues, handleInputChange } = useForm(initialsFValues);
+  const validate = () => {
+    let temp = {};
+    temp.fullName = values.fullName ? "" : "This field is required.";
+    temp.email = /$|.+@.+..+/.test(values.email) ? "" : "Email is not valid.";
+    temp.mobile =
+      values.mobile.length > 9 ? "" : "Minimum 10 numbers requires.";
+    temp.departmentId =
+      values.departmentId.length != 0 ? "" : "This field is required.";
+    setErrors({
+      ...temp,
+    });
+    return Object.values(temp).every((x) => x == "");
+  };
+  const { values, setValues, handleInputChange, errors, setErrors } =
+    useForm(initialsFValues);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) window.alert("hey");
+  };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={6}>
           <Controls.Input
