@@ -1,7 +1,13 @@
-import { Grid, TextField } from "@material-ui/core";
 import React from "react";
 import { useForm, Form } from "../../components/useForm";
+import { Controls } from "../../components/controls/Controls";
+import { Grid } from "@material-ui/core";
 
+const genderItems = [
+  { id: "male", title: "male" },
+  { id: "female", title: "female" },
+  { id: "other", title: "other" },
+];
 const initialsFValues = {
   id: 0,
   fullName: "",
@@ -20,21 +26,21 @@ export default function EmployeeForm() {
     <Form>
       <Grid container>
         <Grid item xs={6}>
-          <TextField
-            variant="outlined"
+          <Controls.Input
             label="Full Name"
             name="fullName"
             value={values.fullName}
             onChange={handleInputChange}
           />
-          <TextField
+
+          <Controls.Input
             variant="outlined"
             name="email"
             label="Email"
             value={values.email}
             onChange={handleInputChange}
           />
-          <TextField
+          <Controls.Input
             variant="outlined"
             name="city"
             label="City"
@@ -42,7 +48,15 @@ export default function EmployeeForm() {
             onChange={handleInputChange}
           />
         </Grid>
-        <Grid item xs={6}></Grid>
+        <Grid item xs={6}>
+          <Controls.RadioGroup
+            name="gender"
+            label="Gender"
+            value={values.gender}
+            onChange={handleInputChange}
+            items={genderItems}
+          />
+        </Grid>
       </Grid>
     </Form>
   );
