@@ -29,7 +29,7 @@ const headCells = [
 export default function Employees() {
   const classes = useStyles();
   const [records, setRecords] = useState(employeeService.getAllEmployees);
-  const { TblContainer, TblHead } = useTable(records, headCells);
+  const { TblContainer, TblHead, TblPagination } = useTable(records, headCells);
   return (
     <>
       <PageHeader
@@ -54,6 +54,7 @@ export default function Employees() {
             ))}
           </TableBody>
         </TblContainer>
+        <TblPagination />
       </Paper>
     </>
   );
