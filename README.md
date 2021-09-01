@@ -6,8 +6,8 @@
 * Mui Theme Customization
 * Mui Form Design
 * Form Validation & Submission
-<!-- * Mui Table/ DataTable
-* MuiPopup Dialog
+* Mui Table/ DataTable
+<!-- * MuiPopup Dialog
 * Mui Notification
-* ConfirmDialog -->
+* ConfirmDialog  -->
 
