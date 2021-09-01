@@ -25,15 +25,17 @@ export default function EmployeeForm() {
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ("fullName" in fieldValues)
-      temp.fullName = values.fullName ? "" : "This field is required.";
+      temp.fullName = fieldValues.fullName ? "" : "This field is required.";
     if ("email" in fieldValues)
-      temp.email = /$|.+@.+..+/.test(values.email) ? "" : "Email is not valid.";
+      temp.email = /$|.+@.+..+/.test(fieldValues.email)
+        ? ""
+        : "Email is not valid.";
     if ("mobile" in fieldValues)
       temp.mobile =
-        values.mobile.length > 9 ? "" : "Minimum 10 numbers requires.";
+        fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers requires.";
     if ("departmentId" in fieldValues)
       temp.departmentId =
-        values.departmentId.length != 0 ? "" : "This field is required.";
+        fieldValues.departmentId.length != 0 ? "" : "This field is required.";
     setErrors({
       ...temp,
     });
