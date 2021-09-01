@@ -22,21 +22,27 @@ const initialsFValues = {
 };
 
 export default function EmployeeForm() {
-  const validate = () => {
-    let temp = {};
-    temp.fullName = values.fullName ? "" : "This field is required.";
-    temp.email = /$|.+@.+..+/.test(values.email) ? "" : "Email is not valid.";
-    temp.mobile =
-      values.mobile.length > 9 ? "" : "Minimum 10 numbers requires.";
-    temp.departmentId =
-      values.departmentId.length != 0 ? "" : "This field is required.";
+  const validate = (fieldValues = values) => {
+    let temp = { ...errors };
+    if ("fullName" in fieldValues)
+      temp.fullName = values.fullName ? "" : "This field is required.";
+    if ("email" in fieldValues)
+      temp.email = /$|.+@.+..+/.test(values.email) ? "" : "Email is not valid.";
+    if ("mobile" in fieldValues)
+      temp.mobile =
+        values.mobile.length > 9 ? "" : "Minimum 10 numbers requires.";
+    if ("departmentId" in fieldValues)
+      temp.departmentId =
+        values.departmentId.length != 0 ? "" : "This field is required.";
     setErrors({
       ...temp,
     });
-    return Object.values(temp).every((x) => x == "");
+
+    if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
-  const { values, setValues, handleInputChange, errors, setErrors } =
-    useForm(initialsFValues);
+
+  const { values, setValues, handleInputChange, errors, setErrors, resetForm } =
+    useForm(initialsFValues, true, validate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,6 +58,7 @@ export default function EmployeeForm() {
             name="fullName"
             value={values.fullName}
             onChange={handleInputChange}
+            error={errors.fullName}
           />
 
           <Controls.Input
@@ -60,6 +67,7 @@ export default function EmployeeForm() {
             label="Email"
             value={values.email}
             onChange={handleInputChange}
+            error={errors.email}
           />
 
           <Controls.Input
@@ -68,6 +76,7 @@ export default function EmployeeForm() {
             label="Mobile"
             value={values.mobile}
             onChange={handleInputChange}
+            error={errors.mobile}
           />
           <Controls.Input
             variant="outlined"
@@ -91,6 +100,7 @@ export default function EmployeeForm() {
             value={values.departmentId}
             onChange={handleInputChange}
             options={employeeService.getDepartmentCollection()}
+            error={errors.departmentId}
           />
           <Controls.DatePicker
             name="hireDate"
@@ -106,7 +116,7 @@ export default function EmployeeForm() {
           />
           <div>
             <Controls.Button type="submit" text="Submit" />
-            <Controls.Button text="Reset" color="default" />
+            <Controls.Button text="Reset" color="default" onClick={resetForm} />
           </div>
         </Grid>
       </Grid>
