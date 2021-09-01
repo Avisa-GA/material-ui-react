@@ -3,6 +3,7 @@ import { useForm, Form } from "../../components/useForm";
 import { Controls } from "../../components/controls/Controls";
 import { Grid } from "@material-ui/core";
 import * as employeeService from "../../services/employeeService";
+import { RestoreTwoTone } from "@material-ui/icons";
 
 const genderItems = [
   { id: "male", title: "male" },
@@ -48,7 +49,8 @@ export default function EmployeeForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) window.alert("hey");
+    if (validate()) employeeService.insertEmployee(values);
+    resetForm();
   };
 
   return (
